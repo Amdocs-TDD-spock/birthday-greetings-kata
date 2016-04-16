@@ -10,8 +10,9 @@ public class Main {
 
 	public static void main(String[] args) throws AddressException, IOException, ParseException, MessagingException {
 		EmployeeRepository employeeRepository = new CsvFileEmployeeRepository(new File("employee_data.txt"));
-		BirthdayService service = new BirthdayService(employeeRepository);
-		service.sendGreetings(new XDate(), "localhost", 25);
+		MessagingService messagingService = new EmailMessagingService ("localhost", 25);
+		BirthdayService service = new BirthdayService(employeeRepository, messagingService);
+		service.sendGreetings(new XDate());
 	}
 
 }
