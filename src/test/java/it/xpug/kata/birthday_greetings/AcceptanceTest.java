@@ -1,16 +1,13 @@
 package it.xpug.kata.birthday_greetings;
 
-import static org.junit.Assert.*;
-
-import org.junit.*;
-
-import com.dumbster.smtp.*;
-import org.junit.runner.RunWith;
+import com.dumbster.smtp.SimpleSmtpServer;
+import com.dumbster.smtp.SmtpMessage;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
+import static org.junit.Assert.assertEquals;
 
 public class AcceptanceTest {
 
