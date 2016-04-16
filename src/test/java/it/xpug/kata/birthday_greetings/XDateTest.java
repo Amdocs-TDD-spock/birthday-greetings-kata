@@ -4,11 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
+import java.text.ParseException;
 
 
 public class XDateTest {
 	@Test
-	public void getters() throws Exception {
+	public void getters() throws ParseException {
 		XDate date = new XDate("1789/01/24");
 		assertEquals(1, date.getMonth());
 		assertEquals(24, date.getDay());

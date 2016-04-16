@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import com.dumbster.smtp.*;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.io.File;
-
 
 public class AcceptanceTest {
 
@@ -18,9 +18,10 @@ public class AcceptanceTest {
 	@Before
 	public void setUp() throws Exception {
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
-		EmployeeRepository employeeRepository = new CsvFileEmployeeRepository(new File("employee_data.txt"));
-		MessagingService messagingService=new EmailMessagingService("localhost", NONSTANDARD_PORT);
-		birthdayService = new BirthdayService(employeeRepository, messagingService);
+//		EmployeeRepository employeeRepository = new CsvFileEmployeeRepository(new File("employee_data.txt"));
+//		MessagingService messagingService=new EmailMessagingService("localhost", NONSTANDARD_PORT);
+//		birthdayService = new BirthdayService(employeeRepository, messagingService);
+		birthdayService = Main.getBirthdayService();
 	}
 
 	@After

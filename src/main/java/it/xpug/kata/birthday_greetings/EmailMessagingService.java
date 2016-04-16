@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings;
 
+import org.springframework.stereotype.Component;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -9,7 +11,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * Created by dnmaras on 4/16/16.
  */
 public class EmailMessagingService implements MessagingService {
     private final Properties props;

@@ -7,5 +7,6 @@ import javax.mail.MessagingException;
  */
 public class MessagingServiceException extends RuntimeException {
     public MessagingServiceException(MessagingException e) {
+        super(e);
     }
 }

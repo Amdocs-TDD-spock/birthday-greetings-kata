@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings;
 
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.List;
 

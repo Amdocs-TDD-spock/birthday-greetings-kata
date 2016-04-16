@@ -1,5 +1,7 @@
 package it.xpug.kata.birthday_greetings;
 
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -21,13 +23,13 @@ public class BirthdayService {
 		this.messagingService = messagingService;
 	}
 
-	public void sendGreetings(XDate date) throws IOException, ParseException, MessagingException {
+	public void sendGreetings(XDate date){
 		List<Employee> allEmployees = allEmployees();
 		List<Employee> employeesWithBirthdayToday = selectCelebratedEmployees(date, allEmployees);
 		sendCongrats(employeesWithBirthdayToday);
 	}
 
-	private void sendCongrats(List<Employee> employeesWithBirthdayToday) throws MessagingException {
+	private void sendCongrats(List<Employee> employeesWithBirthdayToday) {
 		for (Employee employee : employeesWithBirthdayToday) {
 			String recipient = employee.getEmail();
 			String body = "Happy Birthday, dear %NAME%!".replace("%NAME%", employee.getFirstName());
@@ -36,7 +38,7 @@ public class BirthdayService {
 		}
 	}
 
-	private List<Employee> allEmployees() throws IOException, ParseException {
+	private List<Employee> allEmployees() {
 		return employeeRepository.loadEmployees();
 	}
 
