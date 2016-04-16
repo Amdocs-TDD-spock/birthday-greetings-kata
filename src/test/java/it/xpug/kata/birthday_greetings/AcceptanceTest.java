@@ -6,13 +6,12 @@ import org.junit.*;
 
 import com.dumbster.smtp.*;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GreetingSpringConfig.class})
 public class AcceptanceTest {
 
 	private static final int NONSTANDARD_PORT = 9999;
@@ -25,7 +24,7 @@ public class AcceptanceTest {
 //		EmployeeRepository employeeRepository = new CsvFileEmployeeRepository(new File("employee_data.txt"));
 //		MessagingService messagingService=new EmailMessagingService("localhost", NONSTANDARD_PORT);
 //		birthdayService = new BirthdayService(employeeRepository, messagingService);
-		birthdayService = Main.getBirthdayService();
+		birthdayService = new AnnotationConfigApplicationContext(GreetingSpringConfig.class).getBean(BirthdayService.class);
 	}
 
 	@After
