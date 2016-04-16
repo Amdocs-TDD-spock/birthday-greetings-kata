@@ -20,7 +20,7 @@ public class BirthdayService {
 	}
 
 	public void sendGreetings(XDate xDate, String smtpHost, int smtpPort) throws IOException, ParseException, AddressException, MessagingException {
-		List<Employee> employees = employeeRepository.getEmployees();
+		List<Employee> employees = employeeRepository.loadEmployees();
 		for (Employee employee : employees) {
 			if (employee.isBirthday(xDate)) {
 				String recipient = employee.getEmail();

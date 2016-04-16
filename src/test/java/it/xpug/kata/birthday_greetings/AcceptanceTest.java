@@ -14,7 +14,7 @@ public class AcceptanceTest {
 	private static final int NONSTANDARD_PORT = 9999;
 	private BirthdayService birthdayService;
 	private SimpleSmtpServer mailServer;
-	private EmployeeRepository employeeRepository = new EmployeeRepository(new File("employee_data.txt"));
+	private CsvEmployeeRepository employeeRepository = new CsvEmployeeRepository(new File("employee_data.txt"));
 
 	@Before
 	public void setUp() throws Exception {
