@@ -19,7 +19,7 @@ public class BirthdayService {
 		this.employeeRepository = employeeRepository;
 	}
 
-	public void sendGreetings(XDate xDate, String smtpHost, int smtpPort) throws IOException, ParseException, AddressException, MessagingException {
+	public void sendGreetings(XDate xDate, String smtpHost, int smtpPort) throws IOException, ParseException, MessagingException {
 		List<Employee> employees = employeeRepository.loadEmployees();
 		for (Employee employee : employees) {
 			if (employee.isBirthday(xDate)) {
@@ -31,7 +31,7 @@ public class BirthdayService {
 		}
 	}
 
-	private void sendMessage(String smtpHost, int smtpPort, String sender, String subject, String body, String recipient) throws AddressException, MessagingException {
+	private void sendMessage(String smtpHost, int smtpPort, String sender, String subject, String body, String recipient) throws MessagingException {
 		// Create a mail session
 		java.util.Properties props = new java.util.Properties();
 		props.put("mail.smtp.host", smtpHost);

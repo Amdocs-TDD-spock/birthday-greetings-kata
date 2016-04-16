@@ -1,26 +1,23 @@
 package it.xpug.kata.birthday_greetings;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Employee Repository implementation which reads from a file.
+ * Employee Repository implementation which reads CSV employees lines from a BufferedReader.
  */
-public class CsvEmployeeRepository implements EmployeeRepository {
-    private final File fileName;
+public class CsvReaderEmployeeRepository implements EmployeeRepository {
+    private final BufferedReader in;
 
-    public CsvEmployeeRepository(File fileName) {
-        this.fileName = fileName;
+    public CsvReaderEmployeeRepository(BufferedReader bufferedReader) {
+        this.in = bufferedReader;
     }
 
     public List<Employee> loadEmployees() throws IOException, ParseException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        return loadEmployees(reader);
-    }
-
-    public List<Employee> loadEmployees(BufferedReader in) throws IOException, ParseException {
         List<Employee> employees = new ArrayList<Employee>();
         String str = in.readLine(); // skip header
         while ((str = in.readLine()) != null) {

@@ -14,11 +14,11 @@ public class AcceptanceTest {
 	private static final int NONSTANDARD_PORT = 9999;
 	private BirthdayService birthdayService;
 	private SimpleSmtpServer mailServer;
-	private CsvEmployeeRepository employeeRepository = new CsvEmployeeRepository(new File("employee_data.txt"));
 
 	@Before
 	public void setUp() throws Exception {
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
+		EmployeeRepository employeeRepository = new CsvFileEmployeeRepository(new File("employee_data.txt"));
 		birthdayService = new BirthdayService(employeeRepository);
 	}
 
