@@ -10,20 +10,21 @@ import java.util.List;
 /**
  * Employee Repository implementation which reads CSV employees lines from a BufferedReader.
  */
-public class CsvReaderEmployeeRepository implements EmployeeRepository {
-    private final BufferedReader in;
+public class CsvReaderEmployeeRepository {
 
-    public CsvReaderEmployeeRepository(BufferedReader bufferedReader) {
-        this.in = bufferedReader;
-    }
-
-    public List<Employee> loadEmployees() throws IOException, ParseException {
+    public List<Employee> loadEmployees(BufferedReader in) {
         List<Employee> employees = new ArrayList<Employee>();
-        String str = in.readLine(); // skip header
-        while ((str = in.readLine()) != null) {
-            String[] employeeData = str.split(", ");
-            Employee employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3]);
-            employees.add(employee);
+        try {
+            String str = in.readLine(); // skip header
+            while ((str = in.readLine()) != null) {
+                String[] employeeData = str.split(", ");
+                Employee employee = new Employee(employeeData[1], employeeData[0], employeeData[2], employeeData[3]);
+                employees.add(employee);
+            }
+        } catch(ParseException e){
+            throw new EmployeesRepositoryNotAccesibleException(e);
+        } catch(IOException e){
+            throw new EmployeesRepositoryNotAccesibleException(e);
         }
         return employees;
     }

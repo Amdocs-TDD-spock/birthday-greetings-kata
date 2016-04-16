@@ -2,6 +2,7 @@ package it.xpug.kata.birthday_greetings;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.Message;
@@ -20,15 +21,32 @@ public class BirthdayService {
 		this.messagingService = messagingService;
 	}
 
-	public void sendGreetings(XDate xDate) throws IOException, ParseException, MessagingException {
-		List<Employee> employees = employeeRepository.loadEmployees();
+	public void sendGreetings(XDate date) throws IOException, ParseException, MessagingException {
+		List<Employee> allEmployees = allEmployees();
+		List<Employee> employeesWithBirthdayToday = selectCelebratedEmployees(date, allEmployees);
+		sendCongrats(employeesWithBirthdayToday);
+	}
+
+	private void sendCongrats(List<Employee> employeesWithBirthdayToday) throws MessagingException {
+		for (Employee employee : employeesWithBirthdayToday) {
+			String recipient = employee.getEmail();
+			String body = "Happy Birthday, dear %NAME%!".replace("%NAME%", employee.getFirstName());
+			String subject = "Happy Birthday!";
+			messagingService.sendMessage( "sender@here.com", subject, body, recipient);
+		}
+	}
+
+	private List<Employee> allEmployees() throws IOException, ParseException {
+		return employeeRepository.loadEmployees();
+	}
+
+	private List<Employee> selectCelebratedEmployees(XDate date, List<Employee> employees) {
+		List<Employee> employeesWithBirthdayToday = new ArrayList<Employee>();
 		for (Employee employee : employees) {
-			if (employee.isBirthday(xDate)) {
-				String recipient = employee.getEmail();
-				String body = "Happy Birthday, dear %NAME%!".replace("%NAME%", employee.getFirstName());
-				String subject = "Happy Birthday!";
-				messagingService.sendMessage( "sender@here.com", subject, body, recipient);
+			if (employee.isBirthday(date)) {
+				employeesWithBirthdayToday.add(employee);
 			}
 		}
+		return employeesWithBirthdayToday;
 	}
 }

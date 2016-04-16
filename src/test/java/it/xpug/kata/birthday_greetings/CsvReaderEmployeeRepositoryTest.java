@@ -20,7 +20,7 @@ public class CsvReaderEmployeeRepositoryTest {
         List<Employee> expectedEmployees= Collections.singletonList(  new Employee( "John","Doe", "1982/10/08", "john.doe@foobar.com"));
         BufferedReader bufferedReader = new BufferedReader(new StringReader("header\r\n" +
                 "Doe, John, 1982/10/08, john.doe@foobar.com\r\n"));
-        List<Employee> actualEmployees = new CsvReaderEmployeeRepository(bufferedReader).loadEmployees();
+        List<Employee> actualEmployees = new CsvReaderEmployeeRepository().loadEmployees(bufferedReader);
         assertEquals(expectedEmployees, actualEmployees);
     }
 }

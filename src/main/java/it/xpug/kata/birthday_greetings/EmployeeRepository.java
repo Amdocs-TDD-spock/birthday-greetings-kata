@@ -8,5 +8,5 @@ import java.util.List;
  * Employee Repository - takes the responsability of giving the list of employees from the storage layer (file, database, internet, etc).
  */
 public interface EmployeeRepository {
-    List<Employee> loadEmployees() throws IOException, ParseException;
+    List<Employee> loadEmployees() throws EmployeesRepositoryNotAccesibleException;
 }

@@ -1,22 +1,30 @@
 package it.xpug.kata.birthday_greetings;
 
 import java.io.*;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Employee Repository implementation which reads from a file.
  */
 public class CsvFileEmployeeRepository implements EmployeeRepository {
-    private final EmployeeRepository employeeRepository;
+    private final CsvReaderEmployeeRepository employeeRepository;
+    private File fileName;
 
-    public CsvFileEmployeeRepository(File fileName) throws FileNotFoundException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        this.employeeRepository = new CsvReaderEmployeeRepository(reader);
+    public CsvFileEmployeeRepository(File fileName) {
+        this.fileName = fileName;
+        this.employeeRepository = new CsvReaderEmployeeRepository();
     }
 
-    public List<Employee> loadEmployees() throws IOException, ParseException {
-        return employeeRepository.loadEmployees();
+    public List<Employee> loadEmployees() {
+        BufferedReader reader = createReader();
+        return employeeRepository.loadEmployees(reader);
+    }
+
+    private BufferedReader createReader() {
+        try {
+            return new BufferedReader(new FileReader(fileName));
+        } catch (FileNotFoundException e) {
+            throw new EmployeesRepositoryNotAccesibleException(e);
+        }
     }
 }

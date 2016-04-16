@@ -20,18 +20,27 @@ public class EmailMessagingService implements MessagingService {
         props.put("mail.smtp.port", "" + smtpPort);
     }
 
-    public void sendMessage(String sender, String subject, String body, String recipient) throws MessagingException {
+    public void sendMessage(String sender, String subject, String body, String recipient) {
         // Create a mail session
         Session session = Session.getInstance(props, null);
 
+        try{
         // Construct the message
+        Message msg = createEmailMessage(sender, subject, body, recipient, session);
+
+        // Send the message
+        Transport.send(msg);
+        } catch (MessagingException e) {
+            throw new MessagingServiceException(e);
+        }
+    }
+
+    private Message createEmailMessage(String sender, String subject, String body, String recipient, Session session) throws MessagingException {
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(sender));
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
         msg.setSubject(subject);
         msg.setText(body);
-
-        // Send the message
-        Transport.send(msg);
+        return msg;
     }
 }
