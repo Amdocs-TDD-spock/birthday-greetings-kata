@@ -12,16 +12,7 @@ import javax.mail.internet.*;
 public class Main {
 
 	public static void main(String[] args) {
-		BirthdayService service = getBirthdayService();
-		service.sendGreetings(new XDate());
-	}
-
-	public static BirthdayService getBirthdayService() {
-		ApplicationContext context =
-				new AnnotationConfigApplicationContext(GreetingSpringConfig.class);
-//		EmployeeRepository employeeRepository = new CsvFileEmployeeRepository(new File("employee_data.txt"));
-//		MessagingService messagingService = new EmailMessagingService ("localhost", 25);
-		return context.getBean(BirthdayService.class);
+//		service.sendGreetings(new XDate());
 	}
 
 }

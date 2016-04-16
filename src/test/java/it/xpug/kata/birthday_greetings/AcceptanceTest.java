@@ -5,10 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import com.dumbster.smtp.*;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {GreetingSpringConfig.class})
 public class AcceptanceTest {
 
 	private static final int NONSTANDARD_PORT = 9999;
