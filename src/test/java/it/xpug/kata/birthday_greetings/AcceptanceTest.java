@@ -18,8 +18,13 @@ public class AcceptanceTest {
 	@Before
 	public void setUp() throws Exception {
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
+		birthdayService = createBirthdayService();
+	}
+
+	private BirthdayService createBirthdayService() {
 		File file = new File("employee_data.txt");
-		birthdayService = new BirthdayService(new FileEmployeeRepository(file));
+		EmployeeRepository repo = new FileEmployeeRepository(file);
+		return new BirthdayService(repo);
 	}
 
 	@After
