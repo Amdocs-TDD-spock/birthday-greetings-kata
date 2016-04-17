@@ -6,6 +6,8 @@ import org.junit.*;
 
 import com.dumbster.smtp.*;
 
+import java.io.File;
+
 
 public class AcceptanceTest {
 
@@ -16,7 +18,8 @@ public class AcceptanceTest {
 	@Before
 	public void setUp() throws Exception {
 		mailServer = SimpleSmtpServer.start(NONSTANDARD_PORT);
-		birthdayService = new BirthdayService(new EmployeeRepository());
+		File file = new File("employee_data.txt");
+		birthdayService = new BirthdayService(new FileEmployeeRepository(file));
 	}
 
 	@After

@@ -36,8 +36,7 @@ public class BirthdayService {
 
 	private List<Employee> loadEmployees(String fileName) throws IOException, ParseException {
 		File file = new File(fileName);
-		EmployeeRepository employeeRepository = this.employeeRepository;
-		return employeeRepository.loadEmployees(file);
+		return employeeRepository.loadEmployees();
 	}
 
 	private void sendMessage(String smtpHost, int smtpPort, String sender, String subject, String body, String recipient) throws AddressException, MessagingException {
